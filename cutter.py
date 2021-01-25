@@ -1,6 +1,7 @@
 import csv
 import os
 import datetime
+import sys
 from os import makedirs, path
 
 
@@ -35,6 +36,9 @@ def operate(targetFile : str,duration : int) -> None:
     if(len(lines) == 0 or len(lines[0]) == 0):
         print('Can\'t handle this file')
         exit(1)
+    if(len(sys.argv) == 2 and sys.argv[1] == '--ig' and len(lines) > 1):
+        lines.remove(lines[0])
+    print(len(lines))
     print('begin ' + str(datetime.datetime.fromtimestamp(int(lines[0][0]))))
     print('end ' + str(datetime.datetime.fromtimestamp(int(lines[len(lines) - 1][0]))))
     #Start output
