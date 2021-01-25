@@ -2,7 +2,6 @@ import csv
 import os
 import datetime
 from os import makedirs, path
-from posix import listdir
 
 
 def main() -> None:
@@ -10,7 +9,7 @@ def main() -> None:
     if(not path.exists(_CSVDIR)):
         makedirs(_CSVDIR)
     while(True):
-        files = list(filter((lambda f :  os.path.isfile(os.path.join(_CSVDIR, f)) and f.endswith('.csv')),listdir(_CSVDIR)))
+        files = list(filter((lambda f :  os.path.isfile(os.path.join(_CSVDIR, f)) and f.endswith('.csv')),os.listdir(_CSVDIR)))
         if(len(files) == 0):
             print("No CSV files found")
             exit(0)
