@@ -5,7 +5,7 @@ from os import makedirs, path
 
 
 def main() -> None:
-    _CSVDIR = './CSV'
+    _CSVDIR = 'CSV'
     if(not path.exists(_CSVDIR)):
         makedirs(_CSVDIR)
     while(True):
@@ -38,6 +38,7 @@ def operate(targetFile : str,duration : int) -> None:
     print('begin ' + str(datetime.datetime.fromtimestamp(int(lines[0][0]))))
     print('end ' + str(datetime.datetime.fromtimestamp(int(lines[len(lines) - 1][0]))))
     #Start output
+    targetFileBaseName = path.splitext(path.basename(targetFile))[0]
     dirName = targetFile[:targetFile.rfind('.')]
     makedirs(name=dirName,exist_ok=True)
     start = int(lines[0][0])
@@ -49,7 +50,7 @@ def operate(targetFile : str,duration : int) -> None:
             break
         if(writingFile == None):
             filesWrote += 1
-            writingFile = open(path.join(dirName , targetFile[targetFile.rfind('/') + 1 :targetFile.rfind('.')] + '_' + str(filesWrote) + '.csv'),'w')
+            writingFile = open(path.join(dirName , targetFileBaseName + '_' + str(filesWrote) + '.csv'),'w')
         if(int(line[0]) <= end):
             writingFile.write(str(line) + '\n')
         else:
