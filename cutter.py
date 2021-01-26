@@ -56,7 +56,10 @@ def operate(targetFile : str,duration : int) -> None:
             filesWrote += 1
             writingFile = open(path.join(dirName , targetFileBaseName + '_' + str(filesWrote) + '.csv'),'w')
         if(int(line[0]) <= end):
-            writingFile.write(str(line) + '\n')
+            writeline = ''
+            for data in line:
+                writeline += (str(data) + ',')
+            writingFile.write(writeline[:writeline.rfind(',')] + '\n')
         else:
             writingFile.close()
             writingFile = None
